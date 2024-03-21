@@ -33,41 +33,42 @@ print(f'A leghosszabb ideig vonalban lévő {maxhivassorszam} ,sorban szerepel,a
 
 print('5.feladat')
 ido = input('Adjon meg egy időpontot(óra perc másodperc):')
-ido = ido.strip().split(' ')
-mp = mpbe(ido[0], ido[1], ido[2])
+ido = list(map(int,ido.strip().split(" ")))
+Idomp = mpbe(ido[0], ido[1], ido[2])
+
 i = 0
-while i < len(hivasok) and not mpbe(hivasok[i][0],hivasok[i][1],hivasok[i][2]) <= mp and mp < mpbe(hivasok[i][3],hivasok[i][4],hivasok[i][5]):
+while i < len(hivasok) and not (mpbe(hivasok[i][0],hivasok[i][1],hivasok[i][2]) <= Idomp and Idomp < mpbe(hivasok[i][3],hivasok[i][4],hivasok[i][5])):
     i += 1
 if i < len(hivasok):
     ugyfel = i + 1
 else:
     ugyfel = 0
 if (ugyfel):
-    v_szama = -1
+    varakozok = -1
     for hivas1 in hivasok:
-        if mpbe(hivasok[i][0],hivasok[i][1],hivasok[i][2])<= mp and mp <mpbe(hivasok[i][3],hivasok[i][4],hivasok[i][5]):    
-            v_szama += 1
-    print(f'A várakozók száma {v_szama} a beszélő {ugyfel} a hívó.')
+        if mpbe(hivasok[i][0],hivasok[i][1],hivasok[i][2])<= Idomp and Idomp < mpbe(hivasok[i][3],hivasok[i][4],hivasok[i][5]):    
+            varakozok += 1
+    print(f'A várakozók száma {varakozok} a beszélő {ugyfel} a hívó.')
 else : 
     print('Nem volt beszélő')
 print('6.feladat')
-u_hivas = 0
-ue_hivas = 0
-muszak_vege = mpbe(12, 0, 0)
+uH = 0
+uEH = 0
+muszakVege = mpbe(12, 0, 0)
 i = 0
-for hivas1 in hivasok:
-    kezdete = mpbe(hivas1[0], hivas1[1], hivas1[2])
-    vege =mpbe(hivas1[3], hivas1[4], hivas1[5])
-    if kezdete <= muszak_vege and vege >mpbe(hivasok[u_hivas][3],hivasok[u_hivas][4],hivasok[u_hivas][5]):
-        ue_hivas = u_hivas
-        u_hivas = i
+for egyhivas in hivasok:
+    kezdete = mpbe(egyhivas[0], egyhivas[1], egyhivas[2])
+    vege =mpbe(egyhivas[3], egyhivas[4], egyhivas[5])
+    if kezdete <= muszakVege and vege > mpbe(hivasok[uH][3],hivasok[uH][4],hivasok[uH][5]):
+        uEH = uH
+        uEH = i
     i += 1
-ue_hivasvege = mpbe(hivasok[ue_hivas][3],hivasok[ue_hivas][4],hivasok[ue_hivas][5])
-ue_hivaskezdete= mpbe(hivasok[u_hivas][0],hivasok[u_hivas][1],hivasok[u_hivas][2])
-varakozas = ue_hivasvege - ue_hivaskezdete
+uehvege = mpbe(hivasok[uEH][3],hivasok[uEH][4],hivasok[uEH][5])
+uehkezdete= mpbe(hivasok[uH][0],hivasok[uH][1],hivasok[uH][2])
+varakozas = uehvege - uehkezdete
 if varakozas < 0:
     varakozas = 0
-print(f'Az utolsó telefonáló adatai a(z){u_hivas + 1}sorban vannak, {varakozas} masodpercig tart.')
+print(f'Az utolsó telefonáló adatai a(z){uH + 1}sorban vannak, {varakozas} masodpercig tart.')
 
 print('7.feladat')
 bekapcsolt = []
@@ -79,4 +80,9 @@ for hivas1 in hivasok:
         bekapcsolt.append(i)
         elotte = i
     i += 1
-print(bekapcsolt)
+#print(bekapcsolt)
+#siker = open('sikeres.txt', 'wt' enconding='utf-8')
+#if hivasok[bekapcsolt[0]][6]< muszak_kezdete:
+   # kezdet ='08 00 00'
+#else:
+    #kezdet = str(hivasok[bekapcsolt[0]][0])+" "+str(hivasok[bekapcsolt[0]][1])+" "  +str(hivasok[bekapcsolt[0]][2])
