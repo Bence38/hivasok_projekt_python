@@ -29,3 +29,22 @@ for hivas1 in hivasok:
     h_sorszam += 1
 print(f'A leghosszabb ideig vonalban lévő {max} ,sorban szerepel,a hivas hossza:{h_hossz} masodperc')
 
+print('5.feladat')
+ido = input('Adjon meg egy időpontot(óra perc másodperc):')
+ido = ido.strip().split(' ')
+mp = mpbe(ido[0], ido[1], ido[2])
+i = 0
+while i < len(hivasok) and not mpbe(hivasok[i][0],hivasok[i][1],hivasok[i][2])<= mp and mp <mpbe(hivasok[i][3],hivasok[i][4],hivasok[i][5]):
+    i += 1
+if i < len(hivasok):
+    ugyfel = i + 1
+else:
+    ugyfel = 0
+if (ugyfel):
+    v_szama = -1
+    for hivas1 in hivasok:
+        if mpbe(hivasok[i][0],hivasok[i][1],hivasok[i][2])<= mp and mp <mpbe(hivasok[i][3],hivasok[i][4],hivasok[i][5]):    
+            v_szama += 1
+    print(f'A várakozók száma {v_szama} a beszélő {ugyfel} a hívó.')
+else : 
+    print('Nem volt beszélő')
